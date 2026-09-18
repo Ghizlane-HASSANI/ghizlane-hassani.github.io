@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghizlane Hassani — Data &amp; IA en santé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#2b1b24;
+  --ink-soft:#7a6270;
+  --paper:#ffffff;
+  --paper-raised:#fff5f8;
+  --line:#f3d9e3;
+  --pink:#d6577e;
+  --pink-deep:#a83c60;
+  --pink-pale:#ffe6ee;
+  --pink-pale2:#ffd3e2;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'IBM Plex Sans', sans-serif; font-size:16px; line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--pink); color:#fff}
+a{color:var(--pink-deep)}
+.wrap{max-width:960px; margin:0 auto; padding:0 28px}
+h1,h2,h3{font-family:'Fraunces', serif; font-weight:500; margin:0; letter-spacing:-0.01em}
+.mono{font-family:'IBM Plex Mono', monospace}
+
+/* ---------- top nav ---------- */
+.topbar{
+  position:sticky; top:0; z-index:50; backdrop-filter:blur(8px);
+  background:rgba(255,255,255,0.88);
+  border-bottom:1px solid var(--line);
+}
+.topbar .wrap{display:flex; align-items:center; justify-content:space-between; padding:16px 28px}
+.topbar .name{font-family:'Fraunces', serif; font-size:18px}
+.topbar nav{display:flex; gap:22px; font-size:14px}
+.topbar nav a{text-decoration:none; color:var(--ink-soft)}
+.topbar nav a:hover{color:var(--pink-deep)}
+.topbar .cta{
+  font-size:13px; padding:8px 16px; border:1px solid var(--pink); border-radius:20px;
+  text-decoration:none; color:var(--pink-deep); white-space:nowrap; background:var(--pink-pale);
+}
+.topbar .cta:hover{background:var(--pink); color:#fff; border-color:var(--pink)}
+
+/* ---------- hero ---------- */
+.hero{padding:76px 0 20px; position:relative; overflow:hidden}
+.hero::before{
+  content:""; position:absolute; top:-160px; right:-160px; width:420px; height:420px;
+  border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--pink-pale2), transparent 70%);
+  z-index:0;
+}
+.hero .wrap{position:relative; z-index:1}
+.hero .eyebrow{font-size:14px; color:var(--pink-deep); margin-bottom:18px; max-width:560px; font-weight:500}
+.hero h1{font-size:clamp(32px,5.6vw,50px); line-height:1.1; max-width:760px}
+.hero h1 em{font-style:italic; color:var(--pink-deep)}
+.hero p.lede{max-width:580px; margin-top:20px; font-size:17.5px; color:var(--ink-soft)}
+.hero .links{display:flex; gap:18px; margin-top:28px; flex-wrap:wrap; font-size:14px}
+.hero .links a{text-decoration:none; color:var(--ink); border-bottom:1px solid var(--ink); padding-bottom:2px}
+.hero .links a:hover{color:var(--pink-deep); border-color:var(--pink-deep)}
+
+.stats{display:flex; gap:0; flex-wrap:wrap; margin-top:48px; border-top:1px solid var(--line); padding-top:26px}
+.stat{flex:1; min-width:140px; padding:0 22px 0 0}
+.stat .num{font-family:'Fraunces', serif; font-size:34px; color:var(--pink-deep)}
+.stat .lbl{font-size:13px; color:var(--ink-soft); margin-top:2px}
+
+/* ---------- section shell ---------- */
+section{padding:52px 0; border-top:1px solid var(--line)}
+.section-head{display:flex; align-items:baseline; justify-content:space-between; gap:20px; margin-bottom:30px}
+.section-head h2{font-size:27px}
+.section-head .count{font-size:13px; color:var(--ink-soft)}
+
+/* ---------- histoire ---------- */
+.story{max-width:640px; font-size:17px}
+.story p{margin:0 0 18px}
+.story p:first-child::first-letter{
+  font-family:'Fraunces', serif; font-size:46px; float:left; line-height:0.8; padding:6px 8px 0 0; color:var(--pink-deep);
+}
+
+/* ---------- skills ---------- */
+.skill-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px}
+.skill-col{background:var(--paper-raised); border:1px solid var(--line); border-radius:10px; padding:18px 20px}
+.skill-col h3{font-size:14px; color:var(--pink-deep); margin-bottom:10px}
+.skill-col ul{margin:0; padding:0; list-style:none; font-size:14.5px; color:var(--ink-soft)}
+.skill-col li{padding:4px 0}
+
+/* ---------- project categories ---------- */
+.cat-title{display:flex; align-items:center; gap:12px; margin:40px 0 18px}
+.cat-title .dot{width:9px; height:9px; border-radius:50%; background:var(--pink); flex:none}
+.cat-title h3{font-size:12.5px; text-transform:uppercase; letter-spacing:0.08em; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace; font-weight:500}
+.cat-title::after{content:""; flex:1; height:1px; background:var(--line)}
+
+.project{
+  border:1px solid var(--line); border-radius:14px; padding:0; margin-bottom:18px;
+  background:var(--paper); overflow:hidden;
+  box-shadow:0 1px 2px rgba(43,27,36,0.04);
+}
+.project .banner{
+  padding:16px 26px; background:var(--paper-raised); border-bottom:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+}
+.project .banner .motif{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--pink-deep); letter-spacing:0.02em}
+.project .banner .cat-chip{
+  font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 10px; border-radius:20px;
+  background:var(--pink-pale2); color:var(--pink-deep);
+}
+.project .body{padding:22px 26px 24px}
+.project h4{font-size:19px; margin-bottom:5px}
+.project .sub{font-size:13px; color:var(--ink-soft); margin-bottom:14px}
+.project p{margin:0 0 12px; font-size:15px; color:var(--ink-soft)}
+.project p:last-of-type{margin-bottom:14px}
+.project .tags{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:14px}
+.project .tags span{
+  font-family:'IBM Plex Mono',monospace; font-size:11.5px; padding:3px 9px;
+  border:1px solid var(--line); border-radius:20px; color:var(--pink-deep); background:var(--paper-raised);
+}
+.project .metric{
+  display:inline-block; margin-bottom:14px; font-family:'IBM Plex Mono',monospace; font-size:12.5px;
+  color:var(--pink-deep); border-left:2px solid var(--pink); padding-left:8px;
+}
+.project img.proj-img{width:100%; display:block; border-bottom:1px solid var(--line)}
+.project .links{display:flex; gap:16px; flex-wrap:wrap; padding-top:4px; border-top:1px dashed var(--line)}
+.project .links a{
+  font-size:13.5px; text-decoration:none; color:var(--pink-deep); font-weight:500;
+  display:inline-flex; align-items:center; gap:4px; padding-top:12px;
+}
+.project .links a:hover{color:var(--ink)}
+
+/* ---------- certifs / exp ---------- */
+.timeline{border-left:1px solid var(--line); padding-left:24px; margin-left:4px}
+.tl-item{position:relative; padding-bottom:26px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:""; position:absolute; left:-29px; top:5px; width:9px; height:9px; border-radius:50%;
+  background:var(--pink); border:2px solid var(--paper);
+}
+.tl-item .when{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft)}
+.tl-item h4{font-size:16.5px; margin:3px 0 4px}
+.tl-item p{margin:0; font-size:14.5px; color:var(--ink-soft)}
+
+.cert-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px}
+.cert{border:1px solid var(--line); border-radius:10px; padding:16px 18px; background:var(--paper-raised)}
+.cert .score{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--pink-deep)}
+.cert h4{font-size:15px; margin:2px 0 4px}
+.cert p{margin:0; font-size:12.5px; color:var(--ink-soft)}
+
+/* ---------- footer ---------- */
+footer{padding:56px 0 80px; background:var(--paper-raised); border-top:1px solid var(--line)}
+footer h2{font-size:26px; margin-bottom:14px}
+footer p{color:var(--ink-soft); max-width:480px; margin-bottom:26px}
+.footer-links{display:flex; gap:24px; flex-wrap:wrap; font-size:14.5px}
+.footer-links a{color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:2px}
+.footer-links a:hover{border-color:var(--pink-deep); color:var(--pink-deep)}
+.fine{margin-top:50px; font-size:12.5px; color:var(--ink-soft)}
+
+@media (max-width:640px){
+  .topbar nav{display:none}
+  .hero{padding:56px 0 20px}
+  .stats{gap:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="name">Ghizlane Hassani</div>
+    <nav>
+      <a href="#histoire">Parcours</a>
+      <a href="#projets">Projets</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#experience">Expérience</a>
+    </nav>
+    <a class="cta" href="mailto:hassanighizlane20@gmail.com">Me contacter</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow mono">Élève ingénieure — Technologies de l'information pour la santé · EiJV / UPJV</div>
+    <h1>Je mets la donnée au service<br>du <em>soin</em>, pas l'inverse.</h1>
+    <p class="lede">Data, intelligence artificielle et systèmes d'information appliqués à la santé — un parcours construit à la croisée de la biologie, de l'ingénierie et d'une expérience personnelle du soin.</p>
+    <div class="links">
+      <a href="mailto:hassanighizlane20@gmail.com">hassanighizlane20@gmail.com</a>
+      <a href="tel:0669691459">06 69 69 14 59</a>
+      <a href="https://www.linkedin.com/in/hassani-ghizlane-408b28244" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="#projets">Voir les projets ↓</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="num">18</div><div class="lbl">Projets académiques</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">Stages &amp; immersions</div></div>
+      <div class="stat"><div class="num">5</div><div class="lbl">Certifications e-santé / RGPD</div></div>
+      <div class="stat"><div class="num">24 mois</div><div class="lbl">Alternance recherchée — sept. 2026</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="histoire">
+  <div class="wrap">
+    <div class="section-head"><h2>Mon parcours</h2></div>
+    <div class="story">
+      <p>Si je me tourne aujourd'hui vers la data et l'intelligence artificielle en santé, ce n'est pas un choix théorique. C'est l'aboutissement d'un parcours qui a commencé bien avant mes études, du côté des patients. Ayant été malade une grande partie de ma vie, j'ai grandi entourée de médecins, d'analyses biologiques et de traitements — à essayer de comprendre ce que je prenais, pourquoi, et comment un simple prélèvement finissait par revenir sous forme de chiffres capables de changer une décision médicale.</p>
+      <p>Ne pas avoir été acceptée en médecine ne m'a pas éloignée de cette envie de comprendre l'être humain : ça m'a menée vers la biologie, à travers une licence en technologies biomédicales au Maroc, puis vers une seconde licence en Technologies Biomédicales et Techniques Computationnelles à l'UPJV. Je poursuis aujourd'hui un cycle d'ingénieur à l'École d'Ingénieurs Jules Verne, spécialité Numérique, Santé et IA — du côté, cette fois, de celles et ceux qui construisent les outils qui font avancer le soin.</p>
+      <p>Ayant été de l'autre côté du parcours de soin avant d'apprendre à le transformer, je sais la différence que peut faire une donnée bien exploitée, bien protégée et bien restituée dans la vie d'une personne. C'est cette conviction qui traverse chacun des projets présentés ci-dessous.</p>
+    </div>
+  </div>
+</section>
+
+<section id="competences">
+  <div class="wrap">
+    <div class="section-head"><h2>Compétences</h2></div>
+    <div class="skill-grid">
+      <div class="skill-col">
+        <h3>Langages &amp; data</h3>
+        <ul>
+          <li>Python (pandas, scikit-learn, matplotlib)</li>
+          <li>R / RStudio (statistiques, RMarkdown)</li>
+          <li>SQL &amp; NoSQL (MongoDB)</li>
+          <li>MATLAB / Simulink</li>
+          <li>C (algorithmique bas niveau)</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Santé &amp; systèmes d'information</h3>
+        <ul>
+          <li>Modélisation MERISE (MCD/MLD, 3FN)</li>
+          <li>Interopérabilité (HL7, FHIR)</li>
+          <li>Imagerie médicale (DICOM, segmentation)</li>
+          <li>Instrumentation biomédicale</li>
+          <li>Réglementation des dispositifs médicaux (MDR)</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>IA &amp; traitement du signal</h3>
+        <ul>
+          <li>Machine learning supervisé (classification, scoring)</li>
+          <li>Traitement ECG / EEG / EMG (FFT, HRV)</li>
+          <li>Causalité de Granger, autocorrélation</li>
+          <li>Logique propositionnelle &amp; solveurs SAT</li>
+          <li>IA explicable (XAI)</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Sécurité &amp; systèmes embarqués</h3>
+        <ul>
+          <li>RGPD, anonymisation, confidentialité différentielle</li>
+          <li>Cryptographie (hachage, KDF, salage)</li>
+          <li>Arduino, capteurs, IoT/IoMT (WiFi, LoRa, MQTT)</li>
+          <li>Git, Linux</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projets">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Projets</h2>
+      <span class="count mono">18 projets · 2024–2026</span>
+    </div>
+
+    <div class="cat-title"><span class="dot"></span><h3>Intelligence artificielle &amp; santé connectée</h3></div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">IoMT · TinyML · XAI · ASCON-128 · RGPD mineurs</span><span class="cat-chip">Projet d'équipe · 6 pers.</span></div>
+      <div class="body">
+        <h4>Bracelet intelligent de surveillance médicale</h4>
+        <div class="sub">Projet de fin d'année interdisciplinaire — responsable du pôle IA · encadrants M. Baudrin, M. Durand, Mme Martinez</div>
+        <p>Conception complète d'un bracelet IoMT de surveillance continue (température, rythme cardiaque, SpO2) pour des enfants de 4 mois à 7 ans en milieu scolaire. Architecture de détection à trois couches : seuils pédiatriques déterministes (OMS/CNPU), analyse de tendance temporelle, puis apprentissage continu avec baseline individuelle (TinyML) — couplée à un score de risque explicable (XAI) contre la fatigue d'alarme. Volet sécurité en binôme avec le pôle cyber : chiffrement ASCON-128, routage BLE→OSCORE→MQTT, FIDO2, pipeline de tokenisation RGPD sur données de mineurs.</p>
+        <div class="tags"><span>IA</span><span>XAI</span><span>TinyML</span><span>IoMT</span><span>RGPD</span><span>MQTT</span></div>
+        <div class="links"><a href="docs/bracelet_iot.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">5 110 patients · 12 variables · recall optimisé</span><span class="cat-chip">TP noté · individuel</span></div>
+      <div class="body">
+        <h4>Prédiction du risque d'AVC</h4>
+        <div class="sub">Machine learning, Python</div>
+        <p>Construction d'un modèle prédictif du risque d'AVC sur 5 110 patients : traitement des valeurs manquantes (imputation par la médiane sur le train set uniquement, pour éviter toute fuite de données), puis entraînement de modèles de classification. Enjeu central : un faux négatif étant bien plus dangereux qu'un faux positif en contexte médical, le choix des métriques et des seuils de décision a été orienté pour minimiser ce risque plutôt que pour maximiser la seule exactitude globale.</p>
+        <div class="tags"><span>Python</span><span>scikit-learn</span><span>classification médicale</span><span>gestion des faux négatifs</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">4×4×4 → 9×9×9 · 729 variables · clauses CNF</span><span class="cat-chip">TP · individuel</span></div>
+      <div class="body">
+        <h4>Introduction à l'IA — Solveurs SAT</h4>
+        <div class="sub">Logique propositionnelle, Python</div>
+        <p>Formalisation de problèmes en logique propositionnelle : mise en forme normale conjonctive, transformation de Tseitin sur des formules complexes, modélisation d'un problème de coloration de graphe, puis généralisation à un solveur de Sudoku 4×4 et 9×9 par génération programmatique de clauses.</p>
+        <div class="tags"><span>Python</span><span>SAT</span><span>Tseitin</span><span>logique propositionnelle</span></div>
+        <div class="links"><a href="docs/tp_sat.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="cat-title"><span class="dot"></span><h3>Signal physiologique &amp; systèmes embarqués</h3></div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">EMG · calibrage 3 niveaux · WiFi/LoRa</span><span class="cat-chip">Projet d'équipe · 3 pers.</span></div>
+      <div class="body">
+        <h4>EMG Smart Grip — systèmes embarqués / IoT</h4>
+        <div class="sub">Arduino MKR1010</div>
+        <p>Dispositif de mesure de l'activité musculaire de l'avant-bras via capteur EMG à électrodes de surface, avec calibrage personnalisé en trois niveaux d'effort. Le microcontrôleur compare en continu le signal aux repères de calibrage et fournit un retour immédiat, dans une logique de rééducation. Transmission en temps réel par WiFi, architecture pensée pour être également compatible LoRa.</p>
+        <div class="tags"><span>Arduino MKR1010</span><span>EMG</span><span>IoT</span><span>WiFi/LoRa</span></div>
+        <div class="links"><a href="docs/emg_smart_grip.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">vM=1 → vM=5 · matrice 6×6 · marges 60–80°</span><span class="cat-chip">TP · individuel</span></div>
+      <div class="body">
+        <h4>Modélisation et régulation d'un système tumeur–immunité</h4>
+        <div class="sub">MATLAB / Simulink — encadré par M. Jérôme Bosche</div>
+        <p>Étude d'un modèle non linéaire tumeur–immunité sous chimiothérapie : simulation de l'évolution tumorale sur 120 jours pour cinq doses, mettant en évidence une relation dose-effet claire. Linéarisation du système (matrice d'état 6×6, stabilité vérifiée par les valeurs propres), puis synthèse de trois correcteurs PID pour réguler automatiquement le traitement.</p>
+        <div class="metric">Marges de phase des correcteurs PID : ~60 à 80° · système stable sur tout le domaine testé</div>
+        <div class="links"><a href="docs/tumeur_pid.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">époques 30s · FFT · normalisation spectrale</span><span class="cat-chip">TD/TP · individuel</span></div>
+      <div class="body">
+        <h4>Analyse spectrale EEG — repos &amp; frequency tagging</h4>
+        <div class="sub">MATLAB</div>
+        <p>Analyse de séries temporelles EEG multidimensionnelles : découpage en époques de 30 s, calcul du spectre par FFT sur données de repos, puis analyse d'un paradigme de stimulation par frequency tagging avec normalisation du spectre par la moyenne des fréquences voisines.</p>
+        <div class="tags"><span>EEG</span><span>FFT</span><span>frequency tagging</span></div>
+        <div class="links"><a href="docs/eeg_td.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">bruit · tendance · Granger causality</span><span class="cat-chip">TP · individuel</span></div>
+      <div class="body">
+        <h4>Traitement du signal — bruit, autocorrélation &amp; causalité</h4>
+        <div class="sub">MATLAB</div>
+        <p>Construction et analyse d'un signal sinusoïdal bruité avec tendance quadratique : prétraitement (centrage, retrait de tendance), analyse temporelle par autocorrélation, analyse spectrale par FFT, et test de causalité de Granger sur un couple de signaux simulés où l'un influence l'autre avec un décalage temporel.</p>
+        <div class="tags"><span>MATLAB</span><span>autocorrélation</span><span>causalité de Granger</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">capteur → conditionneur → carte d'acquisition</span><span class="cat-chip">Rapport · individuel</span></div>
+      <div class="body">
+        <h4>Chaîne d'acquisition et capteurs en instrumentation biomédicale</h4>
+        <div class="sub">Encadré par Pr. Ardalan Aarabi</div>
+        <p>Étude de la chaîne d'acquisition numérique en instrumentation biomédicale : capteurs, rôle du conditionneur et de la carte d'acquisition dans la qualité du signal, illustrés par le cas concret de l'ECG, avec une ouverture sur les innovations récentes du domaine.</p>
+        <div class="tags"><span>instrumentation biomédicale</span><span>capteurs</span><span>ECG</span></div>
+        <div class="links"><a href="docs/chaine_acquisition.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="cat-title"><span class="dot"></span><h3>Robotique</h3></div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">MATLAB GUIDE · template matching · dual-arm</span><span class="cat-chip">Projet d'équipe · 2 pers.</span></div>
+      <img class="proj-img" src="images/baxter_demo.jpg" alt="Interface graphique de contrôle du robot Baxter, avec le robot en démonstration physique manipulant des objets sur une table">
+      <div class="body">
+        <h4>Contrôle et programmation du robot Baxter</h4>
+        <div class="sub">Projet de fin d'études — encadré par MM. Ardalan Aarabi, Erwan Stephan-Blanchard, Sayed Amir Mousavi Mobarakeh</div>
+        <p>Prise en main du robot collaboratif Baxter pour des tâches simples et l'identification d'objets : exercices d'entraînement sous MATLAB GUIDE, puis développement d'une interface graphique de contrôle. Intégration de contrôleurs externes (joystick Thrustmaster, manette Tech Mobility) et mise en œuvre du template matching pour la reconnaissance d'objets et le déplacement automatisé du robot à partir du flux des caméras embarquées.</p>
+        <div class="tags"><span>MATLAB GUIDE</span><span>robot Baxter</span><span>template matching</span></div>
+        <div class="links"><a href="docs/robot_baxter.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="cat-title"><span class="dot"></span><h3>Bases de données &amp; systèmes d'information de santé</h3></div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">MCD/MLD · 3FN · SQL → MongoDB</span><span class="cat-chip">Projet d'équipe · 3 pers.</span></div>
+      <div class="body">
+        <h4>Système d'information hospitalier — MERISE / SQL / MongoDB</h4>
+        <div class="sub">Encadré par Pr. Olivier Gérard</div>
+        <p>Conception complète d'une base de données hospitalière : analyse du besoin, modélisation conceptuelle et logique (MCD/MLD) selon MERISE avec normalisation 3FN, implémentation SQL, puis adaptation vers une solution NoSQL sous MongoDB pour comparer les deux approches de stockage.</p>
+        <div class="tags"><span>MERISE</span><span>SQL</span><span>MongoDB</span></div>
+        <div class="links"><a href="docs/bdd_hopital.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">cahier des charges · MCD · diagrammes de séquence</span><span class="cat-chip">Projet · UML</span></div>
+      <div class="body">
+        <h4>Conception d'un système d'information — réseau de santé</h4>
+        <div class="sub">Projet UML complet</div>
+        <p>Analyse et conception d'un système d'information pour un réseau de santé : cahier des charges détaillé, modèle conceptuel de données, diagrammes de cas d'usage, et diagrammes de séquence pour les parcours de prise de rendez-vous et de consultation.</p>
+        <div class="tags"><span>UML</span><span>MCD</span><span>diagrammes de séquence</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">Business Model Canvas · marquage CE · MDR</span><span class="cat-chip">Projet d'équipe · 2 pers.</span></div>
+      <div class="body">
+        <h4>Five Lives — commercialisation d'un dispositif médical numérique</h4>
+        <div class="sub">Cycle de vie des dispositifs médicaux actifs et logiciels — encadré par Dan Brevière</div>
+        <p>Analyse de la mise sur le marché français d'un dispositif médical numérique : modèle économique, stratégie de classification et de marquage CE, identification des risques et élaboration de la documentation réglementaire associée au cycle de vie du produit.</p>
+        <div class="tags"><span>MDR</span><span>marquage CE</span><span>réglementaire</span></div>
+        <div class="links"><a href="docs/five_lives.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="cat-title"><span class="dot"></span><h3>Cybersécurité &amp; protection des données</h3></div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">SHA-256 vs PBKDF2 · 2 → 200 000 itérations</span><span class="cat-chip">TP · individuel</span></div>
+      <div class="body">
+        <h4>KDF et étirement de clé — PBKDF2</h4>
+        <p>Mesure comparative du temps de calcul entre SHA-256 simple et PBKDF2 à différents nombres d'itérations, démontrant l'intérêt de l'étirement de clé contre les attaques par force brute. Développement en C d'un outil de hachage supportant md5, bcrypt, sha512 et yescrypt, avec génération automatique de sel.</p>
+        <div class="tags"><span>PBKDF2</span><span>C</span><span>bcrypt/yescrypt</span></div>
+        <div class="links"><a href="docs/kdf.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">SHA-1 · John the Ripper · crunch</span><span class="cat-chip">TP · individuel</span></div>
+      <div class="body">
+        <h4>Hachage, intégrité et cassage de mots de passe</h4>
+        <p>Vérification d'intégrité de fichiers par empreinte SHA-1, attaque par dictionnaire avec John the Ripper sur des hachages MD5, puis génération d'un dictionnaire exhaustif pour une attaque par force brute — mise en évidence de la faiblesse des mots de passe courts, y compris hachés.</p>
+        <div class="tags"><span>SHA-1</span><span>John the Ripper</span><span>force brute</span></div>
+        <div class="links"><a href="docs/hachage.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">Shapiro-Wilk · Student · confidentialité différentielle</span><span class="cat-chip">Projet · R</span></div>
+      <div class="body">
+        <h4>Confidentialité différentielle et statistique appliquée</h4>
+        <p>Tests d'hypothèses, régression linéaire et corrélation, complétés par la mise en œuvre de la confidentialité différentielle sur des données de santé sensibles — une technique permettant d'extraire des tendances statistiques sans jamais pouvoir réidentifier un individu.</p>
+        <div class="tags"><span>R</span><span>confidentialité différentielle</span></div>
+      </div>
+    </div>
+
+    <div class="cat-title"><span class="dot"></span><h3>Biomédical, recherche &amp; engagement</h3></div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">cœur artificiel · valvuloplasties</span><span class="cat-chip">Mémoire · L3</span></div>
+      <div class="body">
+        <h4>Dispositifs médicaux en cardiologie</h4>
+        <div class="sub">Mémoire — Licence Sciences pour la Santé, UPJV — encadré par M. Ardalan Aarabi</div>
+        <p>Étude approfondie des dispositifs médicaux thérapeutiques utilisés en cardiologie : principes de fonctionnement du cœur artificiel et des techniques de valvuloplastie.</p>
+        <div class="tags"><span>cardiologie</span><span>dispositifs médicaux</span></div>
+        <div class="links"><a href="docs/coeur_artificiel.pdf" target="_blank" rel="noopener">Voir le rapport ↗</a></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">segmentation · volumes · fraction d'éjection</span><span class="cat-chip">Stage</span></div>
+      <div class="body">
+        <h4>Imagerie IRM cardiaque — segmentation et analyse</h4>
+        <div class="sub">Stage — Plateforme IRM petit animal (CURS), UPJV</div>
+        <p>Traitement d'images IRM et segmentation de structures cardiaques chez le petit animal avec le logiciel Segment, en vue du calcul de paramètres fonctionnels.</p>
+        <div class="tags"><span>IRM</span><span>Segment</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">80 patients · glycémie · HbA1c</span><span class="cat-chip">Stage</span></div>
+      <div class="body">
+        <h4>Étude comparative glycémie / hémoglobine glyquée</h4>
+        <div class="sub">Stage de fin d'études — Hôpital Universitaire International Mohammed VI, Maroc</div>
+        <p>Étude comparative de la glycémie à jeun et de l'hémoglobine glyquée chez 80 patients diabétiques, en laboratoire de biochimie médicale.</p>
+        <div class="tags"><span>biochimie clinique</span><span>diabète</span></div>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="banner"><span class="motif">12h de bénévolat · 3 journées</span><span class="cat-chip">Engagement</span></div>
+      <div class="body">
+        <h4>Mission solidaire — Croix-Rouge française</h4>
+        <p>Collecte, tri et distribution de denrées alimentaires ; visite de structures d'accueil gérées par l'association. Une immersion qui a renforcé ma conviction qu'un bon professionnel reste, avant tout, attentif aux besoins de ceux qui l'entourent.</p>
+        <div class="links"><a href="docs/croix_rouge.pdf" target="_blank" rel="noopener">Voir le compte-rendu ↗</a></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="certifications">
+  <div class="wrap">
+    <div class="section-head"><h2>Certifications</h2></div>
+    <div class="cert-grid">
+      <div class="cert"><div class="score">CNIL · mars 2026</div><h4>Certification RGPD — moyenne 89 %</h4><p>Protection des données, responsabilités des acteurs, rôle du DPO.</p></div>
+      <div class="cert"><div class="score">ANS-Formation · avril 2026</div><h4>Découvrir la e-santé</h4><p>Parcours 1/4 — Agence du Numérique en Santé.</p></div>
+      <div class="cert"><div class="score">ANS-Formation · mai 2026</div><h4>Renforcer mes savoirs en e-santé</h4><p>Parcours 4/4 — Agence du Numérique en Santé.</p></div>
+      <div class="cert"><div class="score">ANS-Formation · mai 2026</div><h4>Élargir ses compétences en e-santé</h4><p>Parcours 3/4 — Agence du Numérique en Santé.</p></div>
+      <div class="cert"><div class="score">ANS-Formation · mai 2026</div><h4>Approfondir les connaissances en e-santé</h4><p>Parcours 2/4 — Agence du Numérique en Santé.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head"><h2>Formation &amp; expérience</h2></div>
+    <div class="timeline">
+      <div class="tl-item"><div class="when">2025 – 2028</div><h4>Cycle d'ingénieur — Technologies de l'information pour la santé</h4><p>École d'Ingénieurs Jules Verne (EiJV), spécialité Numérique, Santé et IA — Amiens</p></div>
+      <div class="tl-item"><div class="when">Juillet – Août 2026</div><h4>Stage — Dermatologie clinique</h4><p>Cabinet du Dr. Salma Machan, Hôpitaux Robert Schuman, Luxembourg</p></div>
+      <div class="tl-item"><div class="when">2024 – 2025</div><h4>Licence Technologies Biomédicales et Techniques Computationnelles</h4><p>Institut d'Ingénierie de la Santé, UPJV — Amiens</p></div>
+      <div class="tl-item"><div class="when">Avril – Mai 2025</div><h4>Stage en imagerie médicale</h4><p>Plateforme IRM petit animal (CURS), UPJV</p></div>
+      <div class="tl-item"><div class="when">2023 – 2024</div><h4>Licence Technologies Biomédicales</h4><p>FSTM — Université Hassan II, Maroc</p></div>
+      <div class="tl-item"><div class="when">Avril – Juin 2024</div><h4>Stage de fin d'études — Biochimie</h4><p>Hôpital Universitaire International Mohammed VI, Maroc</p></div>
+      <div class="tl-item"><div class="when">Engagement</div><h4>Mission solidaire — Croix-Rouge française</h4><p>12 heures de bénévolat, collecte et distribution alimentaire</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <h2>Parlons de votre projet data &amp; santé.</h2>
+    <p>Je recherche un contrat d'apprentissage à partir de septembre 2026, dans les domaines de la data, de l'intelligence artificielle et des systèmes d'information de santé.</p>
+    <div class="footer-links">
+      <a href="mailto:hassanighizlane20@gmail.com">hassanighizlane20@gmail.com</a>
+      <a href="tel:0669691459">06 69 69 14 59</a>
+      <a href="https://www.linkedin.com/in/hassani-ghizlane-408b28244" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="fine mono">Amiens, France</div>
+  </div>
+</footer>
+
+
+</body>
+</html>
