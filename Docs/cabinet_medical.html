@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Système d'information de santé — cabinet médical · Ghizlane Hassani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#221f33;--ink-soft:#645d7c;--paper:#fff;--raised:#f4f2fb;--line:#e1dcf0;--accent:#7c6fc9;--deep:#564aa0;--pale:#eeebfa}
+*{box-sizing:border-box}
+body{margin:0;font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 22px 60px}
+a{color:var(--deep)}
+.back{font-size:14px;text-decoration:none}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(26px,4vw,36px);line-height:1.2;margin:18px 0 6px}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;margin:40px 0 12px}
+.sub{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 20px}
+.tags span{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:3px 10px;border-radius:20px;background:var(--pale);color:var(--deep)}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin:22px 0}
+.fact{background:var(--raised);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.fact b{display:block;font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:24px;color:var(--deep)}
+.fact span{font-size:13px;color:var(--ink-soft)}
+.mine{border-left:3px solid var(--accent);background:var(--raised);padding:14px 18px;border-radius:0 10px 10px 0}
+.mine ul{margin:6px 0 0;padding-left:20px}
+.shots{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+@media (max-width:700px){.shots{grid-template-columns:1fr}}
+figure{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#fff}
+figure img{width:100%;height:auto;display:block;border-bottom:1px solid var(--line)}
+figcaption{padding:10px 14px;font-size:13.5px;color:var(--ink-soft)}
+figcaption b{color:var(--ink)}
+.arch{font-family:'IBM Plex Mono',monospace;font-size:13px;background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:16px;overflow-x:auto;white-space:pre;line-height:1.5}
+.note{font-size:13.5px;color:var(--ink-soft)}
+.btn{display:inline-block;margin-top:8px;padding:9px 16px;border-radius:8px;background:var(--deep);color:#fff;text-decoration:none;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html#projets">← Retour au portfolio</a>
+<h1>Système d'information de santé — cabinet médical</h1>
+<p class="sub">Projet universitaire en groupe de trois · EIJV · avril – mai 2026</p>
+<div class="tags"><span>UML</span><span>Python / Flask</span><span>API REST</span><span>JWT</span><span>MariaDB / SQL</span><span>Docker Compose</span><span>HTML / CSS</span></div>
+
+<p>Le projet s'est déroulé en deux temps. D'abord la <b>conception UML</b> du système d'information : cahier des charges, modèle conceptuel de données, diagramme de cas d'usage et diagrammes de séquence pour les parcours de prise de rendez-vous et de consultation. Ensuite le <b>développement</b> d'une application web de gestion d'un cabinet médical de ville : dossiers patients, rendez-vous, consultations, prescriptions, lettres d'hospitalisation, allergies, antécédents, analyses de laboratoire et documents médicaux. L'application est découpée en trois services : une base MariaDB, une API REST en Flask sécurisée par jeton JWT, et une interface web Flask qui consomme cette API. L'ensemble se lance avec une seule commande Docker Compose.</p>
+
+<div class="facts">
+  <div class="fact"><b>12</b><span>tables SQL, 15 clés étrangères</span></div>
+  <div class="fact"><b>44</b><span>routes d'API REST</span></div>
+  <div class="fact"><b>2</b><span>profils avec droits distincts : médecin, secrétaire</span></div>
+  <div class="fact"><b>4</b><span>conteneurs Docker : base, API, interface, phpMyAdmin</span></div>
+</div>
+
+<div class="mine">
+<strong>Ma contribution</strong>
+<ul>
+<li><b>Base de données :</b> premières versions du script SQL (tables, relations, contraintes).</li>
+<li><b>Module « Documents médicaux », de bout en bout :</b> table <code>Document</code>, routes d'API (téléversement, consultation, suppression, conversion d'une image en PDF) et page de l'interface. Les fichiers sont limités aux formats PDF, PNG et JPG, et stockés sous un nom aléatoire.</li>
+<li><b>Jeu de démonstration :</b> script qui génère des comptes rendus et des radiographies fictives au format PDF pour les dossiers patients.</li>
+<li><b>Intégration et mise en route :</b> résolution des conflits de fusion, corrections de bugs, nettoyage du code mort, configuration Docker et documentation d'installation pour le groupe.</li>
+</ul>
+<p class="note" style="margin:10px 0 0">L'API principale et l'interface ont été réalisées par les deux autres membres du groupe.</p>
+</div>
+
+<h2>L'application en images</h2>
+<p class="note">Captures réalisées en lançant l'application sur le jeu de données de test. Tous les patients, médecins et documents sont fictifs.</p>
+<div class="shots">
+  <figure><img src="../images/cabinet/docs.jpg" alt="Page Documents médicaux d'un patient : liste des fichiers avec type, description, date, et boutons Voir, PDF, Supprimer" loading="lazy"><figcaption><b>Documents médicaux</b> (mon module) : téléversement, aperçu, export PDF et suppression des pièces du dossier.</figcaption></figure>
+  <figure><img src="../images/cabinet/patient.jpg" alt="Dossier patient : informations administratives, allergies, antécédents, consultations, analyses" loading="lazy"><figcaption><b>Dossier patient</b> : informations administratives, allergies, antécédents, consultations et analyses.</figcaption></figure>
+  <figure><img src="../images/cabinet/dash.jpg" alt="Tableau de bord : indicateurs de rendez-vous et de patients, prochains rendez-vous, derniers patients" loading="lazy"><figcaption><b>Tableau de bord</b> du médecin : indicateurs, prochains rendez-vous, derniers patients.</figcaption></figure>
+  <figure><img src="../images/cabinet/consult.jpg" alt="Détail d'une consultation : symptômes, observations, diagnostic, prescriptions, lettres d'hospitalisation" loading="lazy"><figcaption><b>Consultation</b> : symptômes, observations, diagnostic, prescriptions et lettres d'hospitalisation.</figcaption></figure>
+  <figure><img src="../images/cabinet/rdv.jpg" alt="Liste des rendez-vous avec statut prévu, effectué ou annulé" loading="lazy"><figcaption><b>Rendez-vous</b> : statuts prévu, effectué ou annulé, avec filtre.</figcaption></figure>
+  <figure><img src="../images/cabinet/login.jpg" alt="Page de connexion du cabinet médical" loading="lazy"><figcaption><b>Connexion</b> : mot de passe haché, puis jeton JWT pour chaque appel à l'API.</figcaption></figure>
+</div>
+
+<h2>Architecture</h2>
+<div class="arch">Navigateur ──► Interface web (Flask, gabarits HTML)   port 8080
+                     │  appels HTTP + jeton JWT
+                     ▼
+              API REST (Flask)                      port 8081
+                     │  requêtes SQL paramétrées
+                     ▼
+              Base MariaDB  ◄── phpMyAdmin           port 8083</div>
+<p class="note">Les droits sont vérifiés côté API, route par route : par exemple, seul le médecin peut créer une consultation ou une prescription. Les mots de passe sont stockés hachés (Werkzeug).</p>
+
+<h2>Périmètre</h2>
+<p class="note">Projet académique sur données fictives, lancé en local. Ce n'est pas un logiciel déployé en cabinet : il n'a ni hébergement certifié HDS, ni connexion aux référentiels nationaux (INS, DMP), ni audit de sécurité. Les comptes patients existent dans le modèle de données, mais l'espace patient n'a pas été développé.</p>
+
+<a class="btn" href="cabinet_medical_code.zip" download>Télécharger le code ↓</a>
+</div>
+</body>
+</html>
