@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Robot Baxter — démonstration · Ghizlane Hassani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#221f33;--ink-soft:#645d7c;--paper:#fff;--raised:#f4f2fb;--line:#e1dcf0;--accent:#7c6fc9;--deep:#564aa0;--pale:#eeebfa}
+*{box-sizing:border-box}
+body{margin:0;font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+.wrap{max-width:980px;margin:0 auto;padding:40px 22px 60px}
+a{color:var(--deep)}
+.back{font-size:14px;text-decoration:none}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(26px,4vw,36px);line-height:1.2;margin:18px 0 6px}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;margin:34px 0 12px}
+.sub{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.tags span{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:3px 10px;border-radius:20px;background:var(--pale);color:var(--deep)}
+video{width:100%;display:block;border-radius:14px;border:1px solid var(--line);background:#000;aspect-ratio:16/9}
+.cap{font-size:13px;color:var(--ink-soft);margin:8px 0 0}
+.chapters{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px}
+.chapters button{width:100%;text-align:left;display:flex;gap:12px;align-items:baseline;background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:10px 14px;font:inherit;color:var(--ink);cursor:pointer}
+.chapters button:hover,.chapters button:focus-visible{border-color:var(--accent);outline:none}
+.chapters time{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--deep);min-width:3.2em}
+.note{font-size:13.5px;color:var(--ink-soft)}
+.btn{display:inline-block;margin-top:10px;padding:9px 16px;border-radius:8px;background:var(--deep);color:#fff;text-decoration:none;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html#projets">← Retour au portfolio</a>
+<h1>Contrôle et programmation du robot Baxter</h1>
+<p class="sub">Projet de fin d'études de licence, en binôme avec Assya Ouazari · UPJV, Institut d'Ingénierie de la Santé · 2025</p>
+<div class="tags"><span>MATLAB</span><span>MATLAB GUIDE</span><span>API REST</span><span>Joystick / manette</span><span>Vision par ordinateur</span><span>Template matching</span></div>
+
+<video id="demo" controls muted playsinline preload="metadata" poster="../images/baxter_poster.jpg">
+  <source src="baxter_demo.mp4" type="video/mp4">
+  Votre navigateur ne lit pas cette vidéo. <a href="baxter_demo.mp4">Télécharger la vidéo</a>.
+</video>
+<p class="cap">Vidéo de démonstration, 2 min 54, sans le son. Cliquez sur une étape pour y aller directement.</p>
+
+<h2>Les étapes de la vidéo</h2>
+<ul class="chapters">
+  <li><button type="button" data-t="64"><time>1:04</time><span>Interface graphique MATLAB : chaque bouton commande une articulation (pinces, poignets, coudes, épaules)</span></button></li>
+  <li><button type="button" data-t="83"><time>1:23</time><span>Pilotage d'un bras au joystick Thrustmaster</span></button></li>
+  <li><button type="button" data-t="98"><time>1:38</time><span>Pilotage des deux bras à la manette</span></button></li>
+  <li><button type="button" data-t="108"><time>1:48</time><span>Image de la caméra du robot affichée dans l'interface</span></button></li>
+  <li><button type="button" data-t="120"><time>2:00</time><span>Template matching, objet 1 : le robot repère l'objet choisi et va le saisir</span></button></li>
+  <li><button type="button" data-t="141"><time>2:21</time><span>Template matching, objet 2</span></button></li>
+</ul>
+
+<h2>Principe</h2>
+<p>L'interface, réalisée avec MATLAB GUIDE, envoie chaque commande au serveur de contrôle du robot sous forme de requête HTTP (API REST : une route par mouvement et par articulation). Pour la partie vision, l'utilisateur choisit un objet ; l'image de la caméra du robot est comparée à une image de référence de cet objet (template matching), puis le bras exécute le déplacement programmé pour le saisir et le déposer.</p>
+<p class="note">Périmètre : projet de licence, sur deux objets connus à l'avance et des trajectoires programmées. La vision sert à reconnaître l'objet choisi ; le flux caméra en continu et une reconnaissance plus générale restaient des pistes d'amélioration.</p>
+
+<a class="btn" href="robot_baxter.pdf" target="_blank" rel="noopener">Lire le rapport ↗</a>
+</div>
+<script>
+document.querySelectorAll('.chapters button').forEach(function(b){
+  b.addEventListener('click',function(){
+    var v=document.getElementById('demo');
+    try{ v.currentTime=Number(b.dataset.t); v.play(); }catch(e){}
+    v.scrollIntoView({behavior:'smooth',block:'center'});
+  });
+});
+</script>
+</body>
+</html>

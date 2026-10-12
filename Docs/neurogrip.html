@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroGrip — démonstration · Ghizlane Hassani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#221f33;--ink-soft:#645d7c;--paper:#fff;--raised:#f4f2fb;--line:#e1dcf0;--accent:#7c6fc9;--deep:#564aa0;--pale:#eeebfa}
+*{box-sizing:border-box}
+body{margin:0;font-family:'IBM Plex Sans',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 22px 60px}
+a{color:var(--deep)}
+.back{font-size:14px;text-decoration:none}
+h1{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:clamp(26px,4vw,36px);line-height:1.2;margin:18px 0 6px}
+h2{font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:22px;margin:36px 0 12px}
+.sub{color:var(--ink-soft);font-size:14px;margin:0 0 16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 24px}
+.tags span{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:3px 10px;border-radius:20px;background:var(--pale);color:var(--deep)}
+.layout{display:grid;grid-template-columns:minmax(0,340px) 1fr;gap:32px;align-items:start}
+@media (max-width:760px){.layout{grid-template-columns:1fr}}
+video{width:100%;max-width:340px;display:block;margin:0 auto;border-radius:14px;border:1px solid var(--line);background:#000}
+.cap{font-size:13px;color:var(--ink-soft);text-align:center;margin-top:8px}
+ol.steps{padding-left:20px;margin:0}
+ol.steps li{margin-bottom:10px}
+ol.steps b{color:var(--ink)}
+.chain{font-family:'IBM Plex Mono',monospace;font-size:13px;background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:14px 16px;overflow-x:auto}
+.note{font-size:13.5px;color:var(--ink-soft)}
+.mine{border-left:3px solid var(--accent);background:var(--raised);padding:14px 18px;border-radius:0 10px 10px 0;margin-top:20px}
+.btn{display:inline-block;margin:8px 8px 0 0;padding:9px 16px;border-radius:8px;background:var(--deep);color:#fff;text-decoration:none;font-size:14px}
+.btn.ghost{background:var(--pale);color:var(--deep)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back" href="../index.html#projets">← Retour au portfolio</a>
+<h1>NeuroGrip — monitoring EMG pour la rééducation</h1>
+<p class="sub">Projet en binôme avec Assya Ouazari · Technologies de l'information pour la santé · EIJV · 2025-2026</p>
+<div class="tags"><span>Arduino MKR1010</span><span>EMG de surface</span><span>WiFi</span><span>Python / Flask</span><span>SQLite</span><span>JavaScript / Chart.js</span></div>
+
+<div class="layout">
+  <div>
+    <video controls muted playsinline preload="metadata" poster="../images/neurogrip_poster.jpg">
+      <source src="neurogrip_demo.mp4" type="video/mp4">
+      Votre navigateur ne lit pas cette vidéo. <a href="neurogrip_demo.mp4">Télécharger la vidéo</a>.
+    </video>
+    <p class="cap">Démonstration du prototype, 32 secondes, sans le son</p>
+  </div>
+  <div>
+    <p>NeuroGrip mesure l'activité électrique d'un muscle de l'avant-bras et la transforme en indications utilisables pendant une séance de rééducation : niveau de contraction, nombre de contractions, évolution au fil de la séance et rapport final.</p>
+    <h2 style="margin-top:8px">Ce que montre la vidéo</h2>
+    <ol class="steps">
+      <li><b>Pose des électrodes</b> de surface sur l'avant-bras.</li>
+      <li><b>Programme Arduino</b> dans l'IDE : connexion WiFi, numéro de séance, seuils calculés après une phase de calibrage.</li>
+      <li><b>Contractions de la main</b> : la barre de LED s'allume en fonction de l'effort, et la courbe du tableau de bord suit le signal en direct.</li>
+      <li><b>Tableau de bord et rapport de séance</b> : pic de contraction, répartition des niveaux d'effort, export CSV des mesures.</li>
+    </ol>
+  </div>
+</div>
+
+<div class="mine"><strong>Ma contribution</strong><p style="margin:6px 0 0">Nous avons mené le projet à deux, sur toutes les étapes. J'ai travaillé en particulier sur <b>le programme Arduino</b> (lecture et lissage du signal, niveaux d'effort, envoi WiFi), <b>le montage des capteurs</b> (électrodes, capteur EMG, barre de LED) et <b>l'interface web</b> en HTML et JavaScript, jusqu'à la démonstration filmée.</p></div>
+
+<h2>Chaîne de mesure</h2>
+<div class="chain">Muscle → électrodes sEMG → capteur Grove EMG → Arduino MKR1010 (lissage, niveaux, barre de LED) → WiFi → API Flask + SQLite → tableau de bord web</div>
+<p class="note">Le convertisseur de l'Arduino code le signal sur 10 bits (valeurs de 0 à 1023). Le programme lisse la mesure, la compare à des seuils propres à l'utilisateur, puis l'envoie au serveur, qui l'enregistre et calcule les statistiques de la séance.</p>
+
+<h2>Périmètre</h2>
+<p class="note">Prototype pédagogique, testé en conditions de démonstration. L'amplitude du signal sert d'indicateur d'effort, et l'« indice de fatigue » est un compteur simplifié qui augmente avec la durée des contractions : ce n'est pas une mesure physiologique de la fatigue musculaire, et le dispositif n'a fait l'objet d'aucune validation clinique.</p>
+
+<a class="btn" href="neurogrip_presentation.pdf" target="_blank" rel="noopener">Présentation du projet ↗</a>
+<a class="btn ghost" href="emg_smart_grip.pdf" target="_blank" rel="noopener">Proposition de départ ↗</a>
+</div>
+</body>
+</html>
